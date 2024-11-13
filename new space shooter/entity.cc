@@ -3,7 +3,6 @@
 void entity::Move(const sf::Vector2u& window_size, float dt)
 {
 	move(direction_ * dt);
-	//hitbox_.getPosition();
 
 	sf::Vector2f position = getPosition();
 	sf::Vector2f borders = sf::Vector2f(sprite_.getGlobalBounds().width / 2, sprite_.getGlobalBounds().height / 2);

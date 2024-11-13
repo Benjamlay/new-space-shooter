@@ -21,8 +21,6 @@ class Game
 	asteroidManager asteroids_;
 	enemyManager enemyShips;
 	sf::Clock clock;
-	//float dt = 0.f;
-
 
 public:
 	Game();

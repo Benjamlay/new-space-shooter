@@ -53,11 +53,7 @@ public:
 	// about collisions
 	void Checkcollisions(std::vector<asteroid>& asteroids);
 	void Checkcollisions(std::vector<projectile>& projectiles);
-	void Checkcollisions(std::vector<spaceShip>& enemyShips); //TODO
-
-protected:
-
-
+	void Checkcollisions(std::vector<spaceShip>& enemyShips);
 
 };
 

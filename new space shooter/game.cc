@@ -85,7 +85,6 @@ void Game::Loop()
             {
                 enemyShips.Spawn(sf::Vector2f(rand() % window_.getSize().x, 0.f), ShipType::bad_guy, {});
                 Shipclock.restart();
-                std::cout << "new enemySpaceShip \n";
             }
 
             //projectiles touching something ? _____________________________________________________________________________________________
@@ -115,7 +114,6 @@ void Game::Loop()
         window_.clear();
         window_.draw(background1);
         window_.draw(background2);
-
         window_.draw(ship2);
         window_.draw(projectiles_);
         window_.draw(enemy_projectiles_);
@@ -155,13 +153,6 @@ void Game::Loop()
             window_.draw(pauseText);
             window_.draw(instructionsText);
         }
-        
-
-
-
-
         window_.display();
-
-
 	}
 }
