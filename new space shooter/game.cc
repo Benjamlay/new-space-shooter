@@ -75,7 +75,7 @@ void Game::Loop()
 
             if (asteroidsclock.getElapsedTime().asSeconds() >= meteor_spawn_interval)
             {
-                asteroids_.Spawn(sf::Vector2f(rand() % window_.getSize().x, -31.f), { 0, 200 });
+                asteroids_.Spawn(sf::Vector2f(rand() % window_.getSize().x, -31.f), {});
                 asteroidsclock.restart();
             }
 

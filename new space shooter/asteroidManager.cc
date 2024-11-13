@@ -28,6 +28,7 @@ void asteroidManager::Refresh(const sf::Vector2u& window_size, float dt)
 	for (asteroid& a : asteroids_)
 	{
 		a.Move(window_size, dt);
+		
 	}
 }
 

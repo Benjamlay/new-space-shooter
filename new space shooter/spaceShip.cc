@@ -70,7 +70,7 @@ void spaceShip::GetDamaged(int damage)
 void spaceShip::EnemyDamaged(int damage)
 {
 	enemyPV_ -= damage;
-
+	is_damaged_ = true;
 
 	if (enemyPV_ <= 0)
 	{
@@ -107,14 +107,36 @@ void spaceShip::refresh(float dt)
 		sprite_.setColor(sf::Color(255, 255, 255, 255));
 	}
 
-	if(pv_ >= 15)
+	if(pv_ <= 0)
 	{
-		
+		SetDeath();
 	}
 }
 
 void spaceShip::enemyRefresh(float dt)
 {
+	float damage_cool_down_ = 1.f;
+
+	if (is_damaged_)
+	{
+		damage_cool_down_ -= dt;
+		//std::cout << pv_ << '\n';
+
+		//devient transparent
+		int visibilitySwitch = static_cast<int>(damage_cool_down_ * 10) % 2;
+		if (visibilitySwitch == 0) {
+			sprite_.setColor(sf::Color(255, 255, 255, 50));
+		}
+		else {
+			sprite_.setColor(sf::Color(255, 255, 255, 255));
+		}
+	}
+	//n'est plus transparent
+	if (damage_cool_down_ <= 0)
+	{
+		is_damaged_ = false;
+		sprite_.setColor(sf::Color(255, 255, 255, 255));
+	}
 
 	shoot_dt_ += dt;
 	burst_dt_ += dt;
