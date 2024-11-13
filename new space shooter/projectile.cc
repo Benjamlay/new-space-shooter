@@ -1,4 +1,5 @@
 #include "projectile.h"
+#include <cmath>
 
 sf::Texture projectile::enemy_texture_;
 sf::Texture projectile::ally_texture_;
@@ -17,8 +18,10 @@ projectile::projectile(projectileType& type, sf::Vector2f& direction) : type_(ty
 	{
 		enemy_texture_.loadFromFile("assets\\laserBlue01.png");
 		sprite_.setTexture(enemy_texture_);
-		sprite_.setOrigin(60, 50);
-		direction_ = { 0, 800 };
+		sprite_.setOrigin(60, 70);
+		direction_ = direction;
+		float angle = std::atan2(direction.x, direction.y) * 180 / 3.14159265358979323846;
+		sprite_.setRotation(-angle);
 	}
 
 	

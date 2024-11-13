@@ -5,7 +5,7 @@
 sf::Texture spaceShip::texture_;
 
 constexpr double kShootPeriod = 0.6f;
-constexpr double kBurstPeriod = 0.6f;
+constexpr double kBurstPeriod = 0.f;
 
 spaceShip::spaceShip(ShipType type)
 {

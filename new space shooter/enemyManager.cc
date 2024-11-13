@@ -38,7 +38,8 @@ void enemyManager::Refresh(const float dt, const sf::Vector2u& window_size, proj
 
 			if (e.IsShootReady())
 			{
-				enemy_missiles_manager.Spawn(e.GetPosition(), projectileType::bad_guy,  {});
+				enemy_missiles_manager.Spawn(e.GetPosition(), projectileType::bad_guy,  {200, 800});
+				enemy_missiles_manager.Spawn(e.GetPosition(), projectileType::bad_guy, { -200, 800 });
 			}
 
 			i++;
