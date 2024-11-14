@@ -43,7 +43,7 @@ public:
 	int GetPv();
 
 	// about refresh
-	void refresh(float dt);
+	void refresh(float dt, std::vector<asteroid>& asteroids_, std::vector<projectile>& enemy_projectiles_, std::vector<spaceShip>& enemyShips);
 	void enemyRefresh(float dt);
 
 	bool IsShootReady() const { return is_shoot_ready_; }

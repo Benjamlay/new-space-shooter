@@ -10,6 +10,7 @@ class asteroid : public entity
 public:
 
 	asteroid(sf::Vector2f& direction);
+	void Rotate();
 };
 
 

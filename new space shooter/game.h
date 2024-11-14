@@ -22,8 +22,17 @@ class Game
 	enemyManager enemyShips;
 	sf::Clock clock;
 
+	float ShootPlayercooldown = 1.f;
+	sf::Clock asteroidsclock;
+	sf::Clock Shipclock;
+	float meteor_spawn_interval = 0.5f;
+	float ship_spawn_interval = 6.f;
+	float dt = 0.f;
+
+	bool IsDead = false;
 public:
 	Game();
+	void Setup();
 	void Loop();
 };
 

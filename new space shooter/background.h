@@ -6,6 +6,7 @@
 
 class Background : public sf::Drawable, public sf::Transformable
 {
+private:
 	sf::Sprite sprite_background_;
 	sf::Texture texture_background_;
 

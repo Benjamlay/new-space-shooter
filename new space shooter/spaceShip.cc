@@ -63,7 +63,7 @@ void spaceShip::GetDamaged(int damage)
 	{
 		SetDeath();
 	}
-	damage_cool_down_ = 3.f;
+	damage_cool_down_ = 2.f;
 	
 }
 
@@ -83,8 +83,15 @@ int spaceShip::GetPv()
 	return pv_;
 }
 
-void spaceShip::refresh(float dt)
+void spaceShip::refresh(float dt, std::vector<asteroid>& asteroids_, std::vector<projectile>& enemy_projectiles_, std::vector<spaceShip>& enemyShips)
 {
+	if(!is_damaged_)
+	{
+		Checkcollisions(asteroids_);
+		Checkcollisions(enemy_projectiles_);
+		Checkcollisions(enemyShips);
+	}
+	
 	if (is_damaged_)
 	{
 		damage_cool_down_ -= dt;
@@ -99,7 +106,6 @@ void spaceShip::refresh(float dt)
 			sprite_.setColor(sf::Color(255, 255, 255, 255));
 		}
 	}
-
 	//n'est plus transparent
 	if (damage_cool_down_ <= 0)
 	{
@@ -109,34 +115,17 @@ void spaceShip::refresh(float dt)
 
 	if(pv_ <= 0)
 	{
-		SetDeath();
+		IsDead_ = true;
 	}
+
+
 }
 
 void spaceShip::enemyRefresh(float dt)
 {
 	float damage_cool_down_ = 1.f;
 
-	if (is_damaged_)
-	{
-		damage_cool_down_ -= dt;
-		//std::cout << pv_ << '\n';
-
-		//devient transparent
-		int visibilitySwitch = static_cast<int>(damage_cool_down_ * 10) % 2;
-		if (visibilitySwitch == 0) {
-			sprite_.setColor(sf::Color(255, 255, 255, 50));
-		}
-		else {
-			sprite_.setColor(sf::Color(255, 255, 255, 255));
-		}
-	}
 	//n'est plus transparent
-	if (damage_cool_down_ <= 0)
-	{
-		is_damaged_ = false;
-		sprite_.setColor(sf::Color(255, 255, 255, 255));
-	}
 
 	shoot_dt_ += dt;
 	burst_dt_ += dt;
@@ -165,7 +154,7 @@ void spaceShip::Checkcollisions(std::vector<asteroid>& asteroids)
 		if (a.IsDead() == false && this->get_hit_box().intersects(a.get_hit_box()))
 		{
 			a.SetDeath();
-			this->GetDamaged(20);
+			this->GetDamaged(15);
 		}
 	}
 }
