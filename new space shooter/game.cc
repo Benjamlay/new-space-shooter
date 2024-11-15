@@ -5,34 +5,34 @@
 Game::Game()
 {
 	window_.create(sf::VideoMode(700, 680), "Space Shooter");
-
+    music_Sound_.loadFromFile("assets\\sound\\music.wav");
+    music_.setBuffer(music_Sound_);
 }
 
 void Game::Setup()
 {
+    music_.play();
     ShootPlayercooldown = 1.f;
 	asteroidsclock;
     Shipclock;
 	meteor_spawn_interval = 0.5f;
 	ship_spawn_interval = 3.f;
 	dt = 0.f;
-
     bool IsDead = false;
+    background2.setPosition(0, -680);
+    
 } 
 
 void Game::Loop()
 {
     spaceShip ship2(ShipType::good_guy);
     ship2.setPosition(300, 200);
-    background2.setPosition(0, -680);
     Setup();
-    
 
 	while(window_.isOpen())
 	{
         //to close the SFML window _____________________________________________________________________________________________________
         dt = clock.restart().asSeconds();
-
 
         sf::Event event;
         while (window_.pollEvent(event))
@@ -95,11 +95,6 @@ void Game::Loop()
 
             projectiles_.CheckCollisions(asteroids_.GetEntities());
             projectiles_.CheckCollisions(enemyShips.GetEntities());
-
-            //ship touching something ? _____________________________________________________________________________________________________
-
-            
-            
 
 
             //refresh ______________________________________________________________________________________________________________________

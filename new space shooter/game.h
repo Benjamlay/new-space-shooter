@@ -8,10 +8,13 @@
 #include "enemyManager.h"
 #include "projectileManager.h"
 #include "spaceShip.h"
+#include <SFML/Audio.hpp>
 
 
 class Game
 {
+	sf::SoundBuffer music_Sound_;
+	sf::Sound music_;
 	sf::RenderWindow window_;
 	spaceShip ship1;
 	Background background1;

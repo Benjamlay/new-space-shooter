@@ -5,15 +5,18 @@
 #include "asteroid.h"
 #include "projectile.h"
 #include "spaceShip.h"
+#include <SFML/Audio.hpp>
 
 class projectileManager : public sf::Drawable
 {
 
 	std::vector<projectile> projectiles_;
+	sf::SoundBuffer LaserSound_;
+	sf::Sound Laser_;
 
 public:
 
-	//projectileManager(); //TODO add sound
+	projectileManager();
 	std::vector<projectile>& GetEntities();
 	void Spawn(sf::Vector2f spawn_position, projectileType type, sf::Vector2f direction);
 	void Refresh(const sf::Vector2u& window_size, float dt);

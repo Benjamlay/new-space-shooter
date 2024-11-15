@@ -21,6 +21,7 @@ private:
 	bool is_damaged_ = false;
 	float damage_cool_down_;
 	static sf::Texture texture_;
+
 	int pv_ = 20;
 
 	int enemyPV_ = 15;

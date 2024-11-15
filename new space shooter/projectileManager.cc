@@ -2,6 +2,12 @@
 
 #include <iostream>
 
+projectileManager::projectileManager()
+{
+	LaserSound_.loadFromFile("assets\\sound\\laserSound.wav");
+	Laser_.setBuffer(LaserSound_);
+}
+
 std::vector<projectile>& projectileManager::GetEntities()
 {
 	return projectiles_;
@@ -11,6 +17,7 @@ void projectileManager::Spawn(sf::Vector2f spawn_position, projectileType type, 
 {
 	projectiles_.emplace_back(type, direction);
 	projectiles_.back().setPosition(spawn_position);
+	Laser_.play();
 }
 
 void projectileManager::Refresh(const sf::Vector2u& window_size, float dt)
@@ -49,7 +56,6 @@ void projectileManager::CheckCollisions(std::vector<asteroid>& asteroids)
 			a.get_hit_box();
 			if (p.IsDead() == false && a.IsDead() == false && p.get_hit_box().intersects(a.get_hit_box()))
 			{
-				std::cout << "collision detected" << '\n';
 				p.SetDeath();
 				a.SetDeath();
 			}

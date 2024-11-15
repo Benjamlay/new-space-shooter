@@ -85,12 +85,11 @@ int spaceShip::GetPv()
 
 void spaceShip::refresh(float dt, std::vector<asteroid>& asteroids_, std::vector<projectile>& enemy_projectiles_, std::vector<spaceShip>& enemyShips)
 {
-	if(!is_damaged_)
-	{
+	
 		Checkcollisions(asteroids_);
 		Checkcollisions(enemy_projectiles_);
 		Checkcollisions(enemyShips);
-	}
+	
 	
 	if (is_damaged_)
 	{
@@ -154,7 +153,11 @@ void spaceShip::Checkcollisions(std::vector<asteroid>& asteroids)
 		if (a.IsDead() == false && this->get_hit_box().intersects(a.get_hit_box()))
 		{
 			a.SetDeath();
-			this->GetDamaged(15);
+			if(!is_damaged_)
+			{
+				this->GetDamaged(15);
+			}
+			
 		}
 	}
 }
@@ -166,7 +169,10 @@ void spaceShip::Checkcollisions(std::vector<projectile>& projectiles)
 		if (a.IsDead() == false && this->get_hit_box().intersects(a.get_hit_box()))
 		{
 			a.SetDeath();
-			this->GetDamaged(1);
+			if (!is_damaged_)
+			{
+				this->GetDamaged(1);
+			}
 		}
 	}
 }
@@ -178,7 +184,10 @@ void spaceShip::Checkcollisions(std::vector<spaceShip>& enemyShips)
 		if (a.IsDead() == false && this->get_hit_box().intersects(a.get_hit_box()))
 		{
 			a.EnemyDamaged(5);
-			this->GetDamaged(5);
+			if (!is_damaged_)
+			{
+				this->GetDamaged(5);
+			}
 		}
 	}
 }
