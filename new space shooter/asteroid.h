@@ -9,8 +9,10 @@ class asteroid : public entity
 
 public:
 
-	asteroid(sf::Vector2f& direction);
+	asteroid();
 	void Rotate();
+	sf::FloatRect Get_hit_box();
+	
 };
 
 

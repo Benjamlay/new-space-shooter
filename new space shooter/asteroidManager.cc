@@ -7,9 +7,9 @@ std::vector<asteroid>& asteroidManager::GetEntities()
 	return asteroids_;
 }
 
-void asteroidManager::Spawn(sf::Vector2f spawn_position, sf::Vector2f direction)
+void asteroidManager::Spawn(sf::Vector2f spawn_position)
 {
-	asteroids_.emplace_back(direction);
+	asteroids_.emplace_back();
 	asteroids_.back().setPosition(spawn_position);
 }
 
@@ -28,7 +28,7 @@ void asteroidManager::Refresh(const sf::Vector2u& window_size, float dt)
 	for (asteroid& a : asteroids_)
 	{
 		a.Move(window_size, dt);
-		a.Rotate();
+		//a.Rotate(); //j'ai du enlevé la rotation car je n'arrive pas à faire suivre la hitbox
 	}
 }
 

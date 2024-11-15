@@ -13,13 +13,12 @@ class asteroidManager : public sf::Drawable
 
 public:
 
-	//projectileManager(); //TODO add sound
 
 	std::vector<asteroid>& GetEntities();
 	
-	void Spawn(sf::Vector2f spawn_position, sf::Vector2f direction);
+	void Spawn(sf::Vector2f spawn_position);
 	void Refresh(const sf::Vector2u& window_size, float dt);
-	//void CheckCollisions(); //TODO check for the enemy, and the asteroid
+	
 
 protected:
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;

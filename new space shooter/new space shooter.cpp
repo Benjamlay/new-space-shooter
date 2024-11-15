@@ -4,9 +4,19 @@
 #include <iostream>
 #include "game.h"
 
+
+
 int main()
 {
-	Game MyGame;
-	MyGame.Loop();
+	bool playagain;
+
+	do
+	{
+		playagain = false;
+		Game MyGame;
+		MyGame.Loop(playagain);
+
+	}while(playagain);
+	
 }
 

@@ -17,9 +17,8 @@ class enemyManager : public sf::Drawable
 public:
 
 	std::vector<spaceShip>& GetEntities();
-	void Spawn(sf::Vector2f spawn_position, ShipType type, sf::Vector2f direction);
+	void Spawn(sf::Vector2f spawn_position, ShipType type);
 	void Refresh(const float dt, const sf::Vector2u& window_size, projectileManager& enemy_missiles_manager);
-	//void Checkcollisions(std::vector<projectile>& projectiles); not useful
 
 protected:
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;

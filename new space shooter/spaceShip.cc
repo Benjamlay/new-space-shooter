@@ -7,34 +7,29 @@ sf::Texture spaceShip::texture_;
 constexpr double kShootPeriod = 0.6f;
 constexpr double kBurstPeriod = 0.f;
 
-spaceShip::spaceShip(ShipType type)
-{
-	texture_sprite_.loadFromFile("assets\\playerShip1_orange.png");
-	sprite_.setTexture(texture_sprite_);
-	sprite_.setScale(0.5f, 0.5f);
-}
 
-spaceShip::spaceShip(ShipType type, sf::Vector2f& direction) : type_(type)
+spaceShip::spaceShip(ShipType type) : type_(type)
 {
-	if(type == ShipType::good_guy)
+	if (type == ShipType::good_guy)
 	{
 		texture_sprite_.loadFromFile("assets\\playerShip1_orange.png");
 		sprite_.setTexture(texture_sprite_);
 	}
-	if(type == ShipType::bad_guy)
+	if (type == ShipType::bad_guy)
 	{
 		texture_.loadFromFile("assets\\playerShip2_blue.png");
 		sprite_.setRotation(180);
 		sprite_.setTexture(texture_);
 		direction_ = { 0, 50 };
 	}
-
-	
 	sprite_.setScale(0.5f, 0.5f);
 }
 
-void spaceShip::playerMove(float dt)
+void spaceShip::playerMove(float dt, sf::RenderWindow& window_)
 {
+
+	sf::Vector2u windowSize = window_.getSize();
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
 		this->Move(sf::Vector2f(0, -500), dt);
 	}
@@ -47,6 +42,25 @@ void spaceShip::playerMove(float dt)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
 		this->Move(sf::Vector2f(500, 0), dt);
 	}
+
+	sf::Vector2f position = this->getPosition();
+
+	if (position.x > windowSize.x) {
+		position.x = 0;
+	}
+	else if (position.x < 0) {
+		position.x = windowSize.x;
+	}
+
+	if (position.y > windowSize.y) {
+		position.y = 675; 
+	}
+	else if (position.y < 0) {
+		position.y = windowSize.y; 
+	}
+
+	this->setPosition(position);
+
 }
 
 bool spaceShip::IsDamaged()
@@ -59,12 +73,12 @@ void spaceShip::GetDamaged(int damage)
 	pv_ -= damage;
 	is_damaged_ = true;
 
-	if(pv_ <= 0)
+	if (pv_ <= 0)
 	{
 		SetDeath();
 	}
 	damage_cool_down_ = 2.f;
-	
+
 }
 
 void spaceShip::EnemyDamaged(int damage)
@@ -83,18 +97,19 @@ int spaceShip::GetPv()
 	return pv_;
 }
 
-void spaceShip::refresh(float dt, std::vector<asteroid>& asteroids_, std::vector<projectile>& enemy_projectiles_, std::vector<spaceShip>& enemyShips)
+
+void spaceShip::refresh(float dt, std::vector<asteroid>& asteroids_, std::vector<projectile>& enemy_projectiles_, std::vector<spaceShip>& enemyShips, sf::Font font2, sf::RenderWindow& window_)
 {
-	
-		Checkcollisions(asteroids_);
-		Checkcollisions(enemy_projectiles_);
-		Checkcollisions(enemyShips);
-	
-	
+
+	Checkcollisions(asteroids_);
+	Checkcollisions(enemy_projectiles_);
+	Checkcollisions(enemyShips);
+
+
 	if (is_damaged_)
 	{
 		damage_cool_down_ -= dt;
-		std::cout << pv_ << '\n';
+		
 
 		//devient transparent
 		int visibilitySwitch = static_cast<int>(damage_cool_down_ * 10) % 2;
@@ -112,7 +127,7 @@ void spaceShip::refresh(float dt, std::vector<asteroid>& asteroids_, std::vector
 		sprite_.setColor(sf::Color(255, 255, 255, 255));
 	}
 
-	if(pv_ <= 0)
+	if (pv_ <= 0)
 	{
 		IsDead_ = true;
 	}
@@ -153,11 +168,11 @@ void spaceShip::Checkcollisions(std::vector<asteroid>& asteroids)
 		if (a.IsDead() == false && this->get_hit_box().intersects(a.get_hit_box()))
 		{
 			a.SetDeath();
-			if(!is_damaged_)
+			if (!is_damaged_)
 			{
-				this->GetDamaged(15);
+				this->GetDamaged(20);
 			}
-			
+
 		}
 	}
 }
@@ -179,6 +194,7 @@ void spaceShip::Checkcollisions(std::vector<projectile>& projectiles)
 
 void spaceShip::Checkcollisions(std::vector<spaceShip>& enemyShips)
 {
+
 	for (auto& a : enemyShips)
 	{
 		if (a.IsDead() == false && this->get_hit_box().intersects(a.get_hit_box()))
@@ -191,7 +207,4 @@ void spaceShip::Checkcollisions(std::vector<spaceShip>& enemyShips)
 		}
 	}
 }
-
-
-
 

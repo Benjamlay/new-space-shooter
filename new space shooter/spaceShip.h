@@ -24,7 +24,7 @@ private:
 
 	int pv_ = 20;
 
-	int enemyPV_ = 15;
+	int enemyPV_ = 7;
 	double shoot_dt_ = 0.f;
 	double burst_dt_ = 0.f;
 	bool burst_ready_ = false;
@@ -34,8 +34,8 @@ public:
 
 	spaceShip() = default;
 	spaceShip(ShipType type);
-	spaceShip(ShipType type, sf::Vector2f& direction);
-	void playerMove(float dt);
+	
+	void playerMove(float dt, sf::RenderWindow& window_);
 
 	//about damage
 	bool IsDamaged();
@@ -44,7 +44,7 @@ public:
 	int GetPv();
 
 	// about refresh
-	void refresh(float dt, std::vector<asteroid>& asteroids_, std::vector<projectile>& enemy_projectiles_, std::vector<spaceShip>& enemyShips);
+	void refresh(float dt, std::vector<asteroid>& asteroids_, std::vector<projectile>& enemy_projectiles_, std::vector<spaceShip>& enemyShips, sf::Font font2, sf::RenderWindow& window_);
 	void enemyRefresh(float dt);
 
 	bool IsShootReady() const { return is_shoot_ready_; }

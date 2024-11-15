@@ -13,6 +13,7 @@ class projectileManager : public sf::Drawable
 	std::vector<projectile> projectiles_;
 	sf::SoundBuffer LaserSound_;
 	sf::Sound Laser_;
+	sf::Clock lastShotTime;
 
 public:
 

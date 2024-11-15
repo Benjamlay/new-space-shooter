@@ -3,7 +3,7 @@
 
 sf::Texture asteroid::asteroids_texture_;
 
-asteroid::asteroid(sf::Vector2f& direction)
+asteroid::asteroid()
 {
 	asteroids_texture_.loadFromFile("assets\\BrownMeteor.png");
 	sprite_.setTexture(asteroids_texture_);
@@ -22,4 +22,16 @@ void asteroid::Rotate()
 	std::uniform_real_distribution<float> uniform_dist_x(0.005, 0.05);
 
 	setRotation(getRotation() + uniform_dist_x(engine));
+}
+
+sf::FloatRect asteroid::Get_hit_box()
+{
+	{
+		hitbox_ = sprite_.getGlobalBounds();
+
+		hitbox_.left += this->getPosition().x;
+		hitbox_.top += this->getPosition().y;
+
+		return hitbox_;
+	}
 }

@@ -11,7 +11,7 @@ projectile::projectile(projectileType& type, sf::Vector2f& direction) : type_(ty
 		ally_texture_.loadFromFile("assets\\laserRed01.png");
 		sprite_.setTexture(ally_texture_);
 		sprite_.setOrigin(-45, 50);
-		direction_ = {0, -1000};
+		direction_ = {0, -900};
 		
 	}
 	if (type == projectileType::bad_guy)

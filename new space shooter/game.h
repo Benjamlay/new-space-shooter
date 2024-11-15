@@ -31,12 +31,14 @@ class Game
 	float meteor_spawn_interval = 0.5f;
 	float ship_spawn_interval = 6.f;
 	float dt = 0.f;
+	int difficulty;
+	float score_;
 
 	bool IsDead = false;
 public:
 	Game();
 	void Setup();
-	void Loop();
+	bool Loop(bool& playagain);
 };
 
 

@@ -6,6 +6,7 @@ projectileManager::projectileManager()
 {
 	LaserSound_.loadFromFile("assets\\sound\\laserSound.wav");
 	Laser_.setBuffer(LaserSound_);
+	Laser_.setVolume(50);
 }
 
 std::vector<projectile>& projectileManager::GetEntities()
@@ -17,7 +18,11 @@ void projectileManager::Spawn(sf::Vector2f spawn_position, projectileType type, 
 {
 	projectiles_.emplace_back(type, direction);
 	projectiles_.back().setPosition(spawn_position);
-	Laser_.play();
+	if(lastShotTime.getElapsedTime().asSeconds() >= 0.3)
+	{
+		Laser_.play();
+		lastShotTime.restart();
+	}
 }
 
 void projectileManager::Refresh(const sf::Vector2u& window_size, float dt)
@@ -73,7 +78,6 @@ void projectileManager::CheckCollisions(std::vector<spaceShip>& enemyShips)
 			s.get_hit_box();
 			if (p.IsDead() == false && s.IsDead() == false && p.get_hit_box().intersects(s.get_hit_box()))
 			{
-				std::cout << "collision detected" << '\n';
 				p.SetDeath();
 				s.EnemyDamaged(1);
 			}
