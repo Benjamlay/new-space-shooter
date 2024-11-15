@@ -30,16 +30,16 @@ void spaceShip::playerMove(float dt, sf::RenderWindow& window_)
 
 	sf::Vector2u windowSize = window_.getSize();
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
 		this->Move(sf::Vector2f(0, -500), dt);
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
 		this->Move(sf::Vector2f(0, 500), dt);
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
 		this->Move(sf::Vector2f(-500, 0), dt);
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
 		this->Move(sf::Vector2f(500, 0), dt);
 	}
 

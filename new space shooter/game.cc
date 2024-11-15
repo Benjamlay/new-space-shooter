@@ -12,7 +12,9 @@ Game::Game()
 void Game::Setup()
 {
     music_.setLoop(true);
+    music_.setVolume(50);
     music_.play();
+    
     ShootPlayercooldown = 1.f;
 	meteor_spawn_interval = 0.5f;
 	ship_spawn_interval = 3.f;
